@@ -1,0 +1,22 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools" package="com.greatideas.cazapp">
+
+    <application android:allowBackup="false"
+                 android:label="@string/app_name"
+                 android:icon="@mipmap/cazapp_logo_round_48"
+                 android:roundIcon="@mipmap/cazapp_logo_round_48"
+                 android:supportsRtl="true"
+                 android:theme="@style/Theme.AppCompat.Light.NoActionBar" tools:ignore="GoogleAppIndexingWarning"
+                 android:name=".CazApp">
+
+        <activity android:name=".modules.main.MainActivity" android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+
+    </application>
+</manifest>

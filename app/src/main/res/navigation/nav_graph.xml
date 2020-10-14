@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/searchFragment">
+    <fragment android:id="@+id/searchFragment" android:name="com.greatideas.cazapp.modules.search.SearchFragment"
+              android:label="SearchFragment">
+        <action
+                android:id="@+id/action_searchFragment_to_detailSongFragment"
+                app:destination="@id/detailSongFragment" />
+        <argument
+                android:name="idSearchSong"
+                app:argType="string" />
+    </fragment>
+    <fragment android:id="@+id/favoritesFragment"
+              android:name="com.greatideas.cazapp.modules.favorites.FavoritesFragment"
+              android:label="FavoritesFragment">
+        <argument
+                android:name="idSearchSong"
+                app:argType="string" />
+        <action
+                android:id="@+id/action_favoritesFragment_to_detailFavoriteSongFragment"
+                app:destination="@id/detailFavoriteSongFragment" />
+    </fragment>
+    <fragment android:id="@+id/loginFragment"
+              android:name="com.greatideas.cazapp.modules.login.LoginFragment"
+              android:label="LoginFragment"/>
+    <action android:id="@+id/toFavoritesFragment" app:destination="@id/favoritesFragment"/>
+    <action android:id="@+id/toSearchFragment" app:destination="@id/searchFragment"/>
+    <action android:id="@+id/toLoginFragment" app:destination="@id/loginFragment"/>
+    <action android:id="@+id/toSource" app:popUpTo="@id/nav_graph" app:popUpToInclusive="true"/>
+    <fragment android:id="@+id/detailSongFragment"
+              android:name="com.greatideas.cazapp.modules.detailsong.DetailSongFragment"
+              android:label="DetailSongFragment"/>
+    <fragment
+            android:id="@+id/detailFavoriteSongFragment"
+            android:name="com.greatideas.cazapp.modules.detailfavoritesong.DetailFavoriteSongFragment"
+            android:label="DetailFavoriteSongFragment" />
+</navigation>

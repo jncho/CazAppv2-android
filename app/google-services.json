@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "48106053603",
+    "firebase_url": "https://caz-app-viper.firebaseio.com",
+    "project_id": "caz-app-viper",
+    "storage_bucket": "caz-app-viper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48106053603:android:fbecb79f158eff314fcad6",
+        "android_client_info": {
+          "package_name": "com.greatideas.cazapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48106053603-o1e8lknp37g8vcmcsmpsjissmjl7e06t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZq4XwDuWCOTIp34WmNrlvRfd5H6vycL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48106053603-o1e8lknp37g8vcmcsmpsjissmjl7e06t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CazAppv2</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="title_main_view">CazApp</string>
+    <string name="title_favorites_toolbar">Favorites</string>
+
+    <string name="app_label">CazApp</string>
+    <string name="search_hint">Search Songs</string>
+
+    <string name="skip">Skip login</string>
+    <string name="server_client_id">1009199789388-bu7djn9ngadsp59tg1mq1svsr7p6tcmj.apps.googleusercontent.com</string>
+</resources>
