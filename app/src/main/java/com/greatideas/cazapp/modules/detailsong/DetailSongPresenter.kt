@@ -47,4 +47,27 @@ class DetailSongPresenter(var view: DetailSongContract.View?) : DetailSongContra
             }
         }
     }
+
+    override fun onCreateNewList(titleList: String) {
+        val isSuccess = interactor.createCustomList(titleList)
+        if (isSuccess){
+            view?.showMessage("List created successfully")
+        }else{
+            view?.showMessage("Error to create list")
+        }
+    }
+
+    override fun getTitlesCustomLists(): Map<ObjectId,String>?{
+        return interactor.getCustomLists()?.map { it.id!! to it.title }?.toMap()
+    }
+
+    override fun onCustomListSelect(idCustomList: ObjectId, song: Song,tune: Int, fontSize: Float,) {
+        interactor.addSongToCustomList(idCustomList,song,tune,fontSize){ isSuccess: Boolean, error: String? ->
+            if (isSuccess){
+                view?.showMessage("Song save in custom list")
+            }else{
+                view?.showMessage(error!!)
+            }
+        }
+    }
 }

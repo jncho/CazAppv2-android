@@ -36,4 +36,11 @@
             android:id="@+id/detailFavoriteSongFragment"
             android:name="com.greatideas.cazapp.modules.detailfavoritesong.DetailFavoriteSongFragment"
             android:label="DetailFavoriteSongFragment" />
+    <fragment
+            android:id="@+id/listFragment"
+            android:name="com.greatideas.cazapp.modules.lists.ListFragment"
+            android:label="ListFragment" />
+    <action
+            android:id="@+id/toListFragment"
+            app:destination="@id/listFragment" />
 </navigation>

@@ -21,13 +21,17 @@ class MainPresenter(private var view: MainContract.View?) : MainContract.Present
     override fun navigationItemSelectedListener() = NavigationView.OnNavigationItemSelectedListener {
 
         when (it.itemId) {
-            R.id.action_songs -> {
+            R.id.action_search -> {
                 router?.navigate(R.id.toSearchFragment)
                 view?.hideDrawer()
                 true
             }
-            R.id.action_private_lists -> false
-            R.id.action_public_lists -> false
+            R.id.action_shared_lists -> false
+            R.id.action_custom_lists -> {
+                router?.navigate(R.id.toListFragment)
+                view?.hideDrawer()
+                true
+            }
             R.id.action_favorites -> {
                 router?.navigate(R.id.toFavoritesFragment)
                 view?.hideDrawer()

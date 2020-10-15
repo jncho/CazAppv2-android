@@ -6,7 +6,7 @@
 >
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/action_songs"
+                android:id="@+id/action_search"
                 android:title="Songs"
                 android:icon="@android:drawable/ic_menu_search"
 
@@ -19,13 +19,13 @@
         />
 
         <item
-                android:id="@+id/action_private_lists"
-                android:title="Private Lists"
+                android:id="@+id/action_custom_lists"
+                android:title="Custom Lists"
                 android:icon="@android:drawable/ic_menu_sort_by_size"
         />
         <item
-                android:id="@+id/action_public_lists"
-                android:title="Public Lists"
+                android:id="@+id/action_shared_lists"
+                android:title="Shared Lists"
                 android:icon="@drawable/public_lists"
         />
     </group>
