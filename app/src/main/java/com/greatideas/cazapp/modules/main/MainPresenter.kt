@@ -28,7 +28,7 @@ class MainPresenter(private var view: MainContract.View?) : MainContract.Present
             }
             R.id.action_shared_lists -> false
             R.id.action_custom_lists -> {
-                router?.navigate(R.id.toListFragment)
+                router?.navigate(R.id.toListsFragment)
                 view?.hideDrawer()
                 true
             }

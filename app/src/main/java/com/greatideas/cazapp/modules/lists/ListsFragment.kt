@@ -10,28 +10,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.CustomList
 import com.greatideas.cazapp.modules.main.MainActivity
-import kotlinx.android.synthetic.main.customlists_fragment.*
+import kotlinx.android.synthetic.main.lists_fragment.*
 
-class ListFragment : Fragment(), ListContract.View{
+class ListsFragment : Fragment(), ListsContract.View{
 
-    lateinit var presenter: ListContract.Presenter
-    lateinit var adapterList: ListAdapter
+    lateinit var presenter: ListsContract.Presenter
+    lateinit var adapterLists: ListsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.customlists_fragment,container,false)
+        return inflater.inflate(R.layout.lists_fragment,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).actionbar.title = getString(R.string.title_lists_toolbar)
-        presenter = ListPresenter(this)
+        presenter = ListsPresenter(this)
 
         // Recycler View
-        adapterList = ListAdapter(null) { presenter.onListSelected(it) }
-        customlist_list.apply {
+        adapterLists = ListsAdapter(null) { presenter.onListSelected(it) }
+        customlists_list.apply {
             layoutManager = LinearLayoutManager(activity)
-            this.adapter = adapterList
+            this.adapter = adapterLists
             setHasFixedSize(true)
         }
     }
@@ -47,9 +47,9 @@ class ListFragment : Fragment(), ListContract.View{
         super.onResume()
     }
 
-    override fun updateRecyclerView(songs: List<CustomList>?) {
-        adapterList.songs = songs
-        adapterList.notifyDataSetChanged()
+    override fun updateRecyclerView(customLists: List<CustomList>?) {
+        adapterLists.customLists = customLists
+        adapterLists.notifyDataSetChanged()
     }
 
 

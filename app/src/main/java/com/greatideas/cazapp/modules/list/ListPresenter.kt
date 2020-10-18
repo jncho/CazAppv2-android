@@ -1,9 +1,10 @@
-package com.greatideas.cazapp.modules.lists
+package com.greatideas.cazapp.modules.list
 
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.CustomList
+import com.greatideas.cazapp.entity.ListSong
 
 class ListPresenter(var view: ListContract.View?) : ListContract.Presenter {
 
@@ -15,13 +16,13 @@ class ListPresenter(var view: ListContract.View?) : ListContract.Presenter {
         interactor = ListInteractor()
     }
 
-    override fun onListSelected(customList: CustomList) {
-        val bundle = bundleOf("idList" to customList.id?.toHexString())
+    override fun onListSongSelected(listSong: ListSong) {
+        val bundle = bundleOf("idList" to listSong.id?.toHexString())
         //router.navigate(R.id.action_favoritesFragment_to_detailFavoriteSongFragment,bundle)
     }
 
-    override fun getLists() {
-        interactor.getLists {
+    override fun getCustomList(idList: String) {
+        interactor.getCustomList(idList) {
             view?.updateRecyclerView(it)
         }
     }

@@ -3,14 +3,14 @@ package com.greatideas.cazapp.modules.lists
 import androidx.navigation.NavController
 import com.greatideas.cazapp.entity.*
 
-interface ListContract {
+interface ListsContract {
     interface View{
-        fun updateRecyclerView(songs: List<CustomList>?)
+        fun updateRecyclerView(customLists: List<CustomList>?)
     }
     interface Presenter{
         fun onViewCreated(router: NavController)
         fun onDestroy()
-        fun onListSelected(favoriteSong: CustomList)
+        fun onListSelected(customList: CustomList)
         fun getLists()
     }
     interface Interactor {

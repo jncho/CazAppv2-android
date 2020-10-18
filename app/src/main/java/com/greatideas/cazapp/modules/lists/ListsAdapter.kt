@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.CustomList
 
-class ListAdapter(var songs: List<CustomList>?, val listener: (CustomList) -> Unit) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class ListsAdapter(var customLists: List<CustomList>?, val listener: (CustomList) -> Unit) : RecyclerView.Adapter<ListsAdapter.ListViewHolder>() {
     override fun getItemCount(): Int {
-        return this.songs?.size ?: 0
+        return this.customLists?.size ?: 0
     }
 
     inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -27,7 +27,7 @@ class ListAdapter(var songs: List<CustomList>?, val listener: (CustomList) -> Un
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bindSong(songs!![position],listener)
+        holder.bindSong(customLists!![position],listener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {

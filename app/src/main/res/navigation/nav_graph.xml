@@ -37,10 +37,21 @@
             android:name="com.greatideas.cazapp.modules.detailfavoritesong.DetailFavoriteSongFragment"
             android:label="DetailFavoriteSongFragment" />
     <fragment
-            android:id="@+id/listFragment"
-            android:name="com.greatideas.cazapp.modules.lists.ListFragment"
-            android:label="ListFragment" />
+            android:id="@+id/listsFragment"
+            android:name="com.greatideas.cazapp.modules.lists.ListsFragment"
+            android:label="ListFragment" >
+        <action
+                android:id="@+id/action_listsFragment_to_listFragment"
+                app:destination="@id/listFragment" />
+        <argument
+                android:name="idCustomList"
+                app:argType="string" />
+    </fragment>
     <action
-            android:id="@+id/toListFragment"
-            app:destination="@id/listFragment" />
+            android:id="@+id/toListsFragment"
+            app:destination="@id/listsFragment" />
+    <fragment
+            android:id="@+id/listFragment"
+            android:name="com.greatideas.cazapp.modules.list.ListFragment"
+            android:label="ListFragment" />
 </navigation>
