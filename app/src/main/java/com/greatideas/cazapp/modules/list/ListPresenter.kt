@@ -16,9 +16,13 @@ class ListPresenter(var view: ListContract.View?) : ListContract.Presenter {
         interactor = ListInteractor()
     }
 
-    override fun onListSongSelected(listSong: ListSong) {
-        val bundle = bundleOf("idList" to listSong.id?.toHexString())
-        //router.navigate(R.id.action_favoritesFragment_to_detailFavoriteSongFragment,bundle)
+    override fun onListSongSelected(customList: CustomList,listSong: ListSong) {
+        val bundle = bundleOf("idCustomList" to customList.id?.toHexString(),"idListSong" to listSong.id?.toHexString())
+        router.navigate(R.id.action_listFragment_to_detailListSongFragment,bundle)
+    }
+
+    override fun backButtonClicked() {
+        router?.navigateUp()
     }
 
     override fun getCustomList(idList: String) {

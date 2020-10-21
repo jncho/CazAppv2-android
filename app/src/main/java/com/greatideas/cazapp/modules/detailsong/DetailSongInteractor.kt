@@ -57,7 +57,7 @@ class DetailSongInteractor() : DetailSongContract.Interactor {
         val customList = localRealm.where<CustomList>().equalTo("id", idCustomList).findFirst()
         try {
             localRealm.executeTransaction {
-                customList?.songs?.add(ListSong(song._id, song, 0, 0f, song.title))
+                customList?.songs?.add(ListSong(ObjectId(), song, tune, fontSize, song.title))
             }
             callback(true, null)
         } catch (e: Exception){

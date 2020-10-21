@@ -10,8 +10,9 @@ interface ListContract {
     interface Presenter{
         fun onViewCreated(router: NavController)
         fun onDestroy()
-        fun onListSongSelected(listSong: ListSong)
+        fun onListSongSelected(customList: CustomList,listSong: ListSong)
         fun getCustomList(idList: String)
+        fun backButtonClicked()
     }
     interface Interactor {
         fun getCustomList(idList: String,listener: (CustomList) -> Unit)

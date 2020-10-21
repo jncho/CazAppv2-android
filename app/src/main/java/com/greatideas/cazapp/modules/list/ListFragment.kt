@@ -31,7 +31,9 @@ class ListFragment : Fragment(), ListContract.View {
         presenter = ListPresenter(this)
 
         // Recycler View
-        adapterList = ListAdapter(null) { presenter.onListSongSelected(it) }
+        adapterList = ListAdapter(null,null) { customList, listSong ->
+            presenter.onListSongSelected(customList,listSong)
+        }
         customlist_list.apply {
             layoutManager = LinearLayoutManager(activity)
             this.adapter = adapterList
@@ -43,14 +45,17 @@ class ListFragment : Fragment(), ListContract.View {
         presenter.onViewCreated(findNavController())
         presenter.getCustomList(arguments?.getString("idCustomList")!!)
 
-        (activity as MainActivity).actionbar.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).drawerToggle.isDrawerIndicatorEnabled = true
-        (activity as MainActivity).setupDrawerToggle()
+        (activity as MainActivity).drawerToggle.isDrawerIndicatorEnabled = false
+        (activity as MainActivity).actionbar.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).toolbar.setNavigationOnClickListener{
+            presenter.backButtonClicked()
+        }
         super.onResume()
     }
 
     override fun updateRecyclerView(customList: CustomList) {
         (activity as MainActivity).actionbar.title = customList.title
+        adapterList.customList = customList
         adapterList.songs = customList.songs
         adapterList.notifyDataSetChanged()
     }

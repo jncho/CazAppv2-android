@@ -9,7 +9,7 @@ import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.CustomList
 import com.greatideas.cazapp.entity.ListSong
 
-class ListAdapter(var songs: List<ListSong>?, val listener: (ListSong) -> Unit) : RecyclerView.Adapter<ListAdapter.ListSongViewHolder>() {
+class ListAdapter(var customList: CustomList?,var songs: List<ListSong>?, val listener: (CustomList,ListSong) -> Unit) : RecyclerView.Adapter<ListAdapter.ListSongViewHolder>() {
     override fun getItemCount(): Int {
         return this.songs?.size ?: 0
     }
@@ -19,16 +19,16 @@ class ListAdapter(var songs: List<ListSong>?, val listener: (ListSong) -> Unit) 
         var songCardView: View = view.findViewById(R.id.list_song_card_view)
         var sectionView: TextView = view.findViewById(R.id.section_list_song_holder)
 
-        fun bindSong(listSong: ListSong, listener: (ListSong) -> Unit){
+        fun bindSong(customList: CustomList,listSong: ListSong, listener: (CustomList,ListSong) -> Unit){
             textView.text = listSong.altTitle
             sectionView.text =listSong.song?.section
-            songCardView.setOnClickListener{listener(listSong)}
+            songCardView.setOnClickListener{listener(customList,listSong)}
 
         }
     }
 
     override fun onBindViewHolder(holder: ListSongViewHolder, position: Int) {
-        holder.bindSong(songs!![position],listener)
+        holder.bindSong(customList!!,songs!![position],listener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSongViewHolder {
