@@ -1,5 +1,6 @@
 package com.greatideas.cazapp.modules.detailsong
 
+import android.view.MenuItem
 import androidx.navigation.NavController
 import com.google.android.gms.common.util.Strings
 import com.greatideas.cazapp.entity.CustomList
@@ -21,6 +22,9 @@ interface DetailSongContract {
         fun getTitlesCustomLists() : Map<ObjectId,String>?
         fun onCustomListSelect(idCustomList: ObjectId,song: Song,tune: Int, fontSize: Float)
         fun onCreateNewList(titleList: String)
+        fun onActionDownSemitone(song: Song)
+        fun onActionUpSemitone(song: Song)
+
     }
     interface Interactor{
         fun getSong(idSong: String,callback: ResultCallbackDetailSong)

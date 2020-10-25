@@ -82,6 +82,16 @@ class DetailSongFragment : Fragment(), DetailSongContract.View {
             SelectListDialog(presenter, song, tune, fontSize).show(parentFragmentManager, "lists")
             true
         }
+        R.id.action_down_semitone -> {
+            presenter.onActionDownSemitone(song)
+            tune--
+            true
+        }
+        R.id.action_up_semitone -> {
+            presenter.onActionUpSemitone(song)
+            tune++
+            true
+        }
         else -> false
     }
 

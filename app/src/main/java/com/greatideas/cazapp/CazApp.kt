@@ -26,7 +26,7 @@ class CazApp : Application(){
                 .build())
 
         // Realm non-synced database
-        val config = RealmConfiguration.Builder().build()
+        val config = RealmConfiguration.Builder().allowWritesOnUiThread(true).build()
         Realm.setDefaultConfiguration(config)
         localRealm = Realm.getDefaultInstance()
 

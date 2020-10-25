@@ -16,7 +16,13 @@ open class Song(
     var title: String = "",
     var section: String = "",
     var body: RealmList<Line> = RealmList()
-) : RealmObject()
+) : RealmObject() {
+    fun transpose(semitones: Int){
+        body.forEach {
+            it.trasnpose(semitones)
+        }
+    }
+}
 
 class SongDecoder() : Decoder<Song>{
     override fun decode(reader: BsonReader, decoderContext: DecoderContext?): Song {

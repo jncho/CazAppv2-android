@@ -70,4 +70,14 @@ class DetailSongPresenter(var view: DetailSongContract.View?) : DetailSongContra
             }
         }
     }
+
+    override fun onActionDownSemitone(song: Song) {
+        song.transpose(-1)
+        view?.updateView(song)
+    }
+
+    override fun onActionUpSemitone(song: Song) {
+        song.transpose(+1)
+        view?.updateView(song)
+    }
 }
