@@ -14,7 +14,6 @@ import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.FavoriteSong
 import com.greatideas.cazapp.entity.ListSong
 import com.greatideas.cazapp.modules.main.MainActivity
-import kotlinx.android.synthetic.main.detail_favorite_song_fragment.*
 import kotlinx.android.synthetic.main.detail_list_song_fragment.*
 import kotlinx.android.synthetic.main.detail_list_song_fragment.editButtons
 import kotlinx.android.synthetic.main.detail_list_song_fragment.toneDownActionButton
@@ -77,6 +76,8 @@ class DetailListSongFragment : Fragment() , DetailListSongContract.View{
 
         toneUpActionButton.setOnClickListener { presenter.onActionUpSemitone(listSong) }
         toneDownActionButton.setOnClickListener { presenter.onActionDownSemitone(listSong) }
+        textsizeDownActionButton.setOnClickListener { presenter.onActionDownSize(listSong) }
+        textsizeUpActionButton.setOnClickListener { presenter.onActionUpSize(listSong) }
     }
 
     @SuppressLint("RestrictedApi")

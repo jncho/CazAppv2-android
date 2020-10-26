@@ -21,8 +21,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.Song
 import com.greatideas.cazapp.modules.main.MainActivity
+import kotlinx.android.synthetic.main.detail_favorite_song_fragment.*
 import kotlinx.android.synthetic.main.detail_song_fragment.*
 import kotlinx.android.synthetic.main.detail_song_fragment.editButtons
+import kotlinx.android.synthetic.main.detail_song_fragment.textsizeDownActionButton
+import kotlinx.android.synthetic.main.detail_song_fragment.textsizeUpActionButton
+import kotlinx.android.synthetic.main.detail_song_fragment.toneDownActionButton
+import kotlinx.android.synthetic.main.detail_song_fragment.toneUpActionButton
 import kotlinx.android.synthetic.main.input_text_dialog.*
 import kotlinx.android.synthetic.main.search_fragment.*
 
@@ -58,6 +63,14 @@ class DetailSongFragment : Fragment(), DetailSongContract.View {
 
         toneUpActionButton.setOnClickListener { presenter.onActionUpSemitone(song) }
         toneDownActionButton.setOnClickListener { presenter.onActionDownSemitone(song) }
+        textsizeDownActionButton.setOnClickListener {
+            fontSize--
+            updateView(song)
+        }
+        textsizeUpActionButton.setOnClickListener {
+            fontSize++
+            updateView(song)
+        }
 
         snackbarMessage = Snackbar.make(fragment_detail_song_view, "", Snackbar.LENGTH_LONG)
     }

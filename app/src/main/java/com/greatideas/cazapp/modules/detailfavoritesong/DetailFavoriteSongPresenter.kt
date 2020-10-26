@@ -50,4 +50,18 @@ class DetailFavoriteSongPresenter(var view: DetailFavoriteSongContract.View?) : 
         }
         view?.updateView(favoriteSong)
     }
+
+    override fun onActionDownSize(favoriteSong: FavoriteSong) {
+        localRealm.executeTransaction {
+            favoriteSong.fontSize-=1
+        }
+        view?.updateView(favoriteSong)
+    }
+
+    override fun onActionUpSize(favoriteSong: FavoriteSong) {
+        localRealm.executeTransaction {
+            favoriteSong.fontSize+=1
+        }
+        view?.updateView(favoriteSong)
+    }
 }

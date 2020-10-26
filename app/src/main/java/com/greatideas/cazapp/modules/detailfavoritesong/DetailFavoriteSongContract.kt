@@ -16,6 +16,8 @@ interface DetailFavoriteSongContract {
         fun backButtonClicked()
         fun onActionDownSemitone(favoriteSong: FavoriteSong)
         fun onActionUpSemitone(favoriteSong: FavoriteSong)
+        fun onActionDownSize(favoriteSong: FavoriteSong)
+        fun onActionUpSize(favoriteSong: FavoriteSong)
     }
     interface Interactor{
         fun getSong(idSong: String,callback: ResultCallbackDetailSong)

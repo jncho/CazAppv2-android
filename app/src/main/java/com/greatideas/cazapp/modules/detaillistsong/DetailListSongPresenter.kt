@@ -36,6 +36,20 @@ class DetailListSongPresenter(var view: DetailListSongContract.View?) : DetailLi
         view?.updateView(listSong)
     }
 
+    override fun onActionDownSize(listSong: ListSong) {
+        localRealm.executeTransaction {
+            listSong.fontSize-=1
+        }
+        view?.updateView(listSong)
+    }
+
+    override fun onActionUpSize(listSong: ListSong) {
+        localRealm.executeTransaction {
+            listSong.fontSize+=1
+        }
+        view?.updateView(listSong)
+    }
+
     override fun getListSong(idCustomList: String,idListSong: String) {
 
         val callback = object : DetailListSongContract.ResultCallbackDetailListSong {

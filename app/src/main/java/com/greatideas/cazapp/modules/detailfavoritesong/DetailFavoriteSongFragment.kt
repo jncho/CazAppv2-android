@@ -79,6 +79,8 @@ class DetailFavoriteSongFragment : Fragment(), DetailFavoriteSongContract.View {
 
         toneUpActionButton.setOnClickListener { presenter.onActionUpSemitone(favoriteSong) }
         toneDownActionButton.setOnClickListener { presenter.onActionDownSemitone(favoriteSong) }
+        textsizeDownActionButton.setOnClickListener { presenter.onActionDownSize(favoriteSong) }
+        textsizeUpActionButton.setOnClickListener { presenter.onActionUpSize(favoriteSong) }
     }
 
     @SuppressLint("RestrictedApi")
