@@ -16,12 +16,17 @@ import com.greatideas.cazapp.entity.ListSong
 import com.greatideas.cazapp.modules.main.MainActivity
 import kotlinx.android.synthetic.main.detail_favorite_song_fragment.*
 import kotlinx.android.synthetic.main.detail_list_song_fragment.*
+import kotlinx.android.synthetic.main.detail_list_song_fragment.editButtons
+import kotlinx.android.synthetic.main.detail_list_song_fragment.toneDownActionButton
+import kotlinx.android.synthetic.main.detail_list_song_fragment.toneUpActionButton
 
 class DetailListSongFragment : Fragment() , DetailListSongContract.View{
 
     lateinit var presenter: DetailListSongContract.Presenter
     lateinit var snackbarMessage: Snackbar
     lateinit var listSong: ListSong
+
+    lateinit var menu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,18 +36,31 @@ class DetailListSongFragment : Fragment() , DetailListSongContract.View{
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.detail_list_song_menu,menu)
+        this.menu = menu
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId){
-        R.id.action_down_semitone -> {
-            presenter.onActionDownSemitone(listSong)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.actionShowEditButtons -> {
+            showEditButtons()
             true
         }
-        R.id.action_up_semitone -> {
-            presenter.onActionUpSemitone(listSong)
+        R.id.actionHideEditButtons -> {
+            hideEditButtons()
             true
         }
         else -> false
+    }
+
+    fun hideEditButtons(){
+        editButtons.visibility = View.GONE
+        menu.findItem(R.id.actionHideEditButtons).isVisible = false
+        menu.findItem(R.id.actionShowEditButtons).isVisible = true
+    }
+
+    fun showEditButtons(){
+        editButtons.visibility = View.VISIBLE
+        menu.findItem(R.id.actionHideEditButtons).isVisible = true
+        menu.findItem(R.id.actionShowEditButtons).isVisible = false
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,6 +74,9 @@ class DetailListSongFragment : Fragment() , DetailListSongContract.View{
 
         snackbarMessage = Snackbar.make(fragment_detail_list_song_view,"", Snackbar.LENGTH_LONG)
         presenter.getListSong(arguments?.getString("idCustomList")!!,arguments?.getString("idListSong")!!)
+
+        toneUpActionButton.setOnClickListener { presenter.onActionUpSemitone(listSong) }
+        toneDownActionButton.setOnClickListener { presenter.onActionDownSemitone(listSong) }
     }
 
     @SuppressLint("RestrictedApi")

@@ -3,6 +3,7 @@ package com.greatideas.cazapp.modules.detailfavoritesong
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.*
@@ -15,11 +16,14 @@ import com.greatideas.cazapp.entity.FavoriteSong
 import com.greatideas.cazapp.modules.main.MainActivity
 import kotlinx.android.synthetic.main.detail_favorite_song_fragment.*
 
-class DetailFavoriteSongFragment : Fragment() , DetailFavoriteSongContract.View{
+class DetailFavoriteSongFragment : Fragment(), DetailFavoriteSongContract.View {
 
     lateinit var presenter: DetailFavoriteSongContract.Presenter
     lateinit var snackbarMessage: Snackbar
     lateinit var favoriteSong: FavoriteSong
+
+    lateinit var menu: Menu
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,32 +32,53 @@ class DetailFavoriteSongFragment : Fragment() , DetailFavoriteSongContract.View{
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.detail_favorite_song_menu,menu)
+        inflater.inflate(R.menu.detail_favorite_song_menu, menu)
+        this.menu = menu
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId){
-        R.id.action_up_semitone -> {
-            presenter.onActionUpSemitone(favoriteSong)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.actionShowEditButtons -> {
+            showEditButtons()
             true
         }
-        R.id.action_down_semitone -> {
-            presenter.onActionDownSemitone(favoriteSong)
+        R.id.actionHideEditButtons -> {
+            hideEditButtons()
             true
         }
         else -> false
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    fun hideEditButtons(){
+        editButtons.visibility = View.GONE
+        menu.findItem(R.id.actionHideEditButtons).isVisible = false
+        menu.findItem(R.id.actionShowEditButtons).isVisible = true
+    }
+
+    fun showEditButtons(){
+        editButtons.visibility = View.VISIBLE
+        menu.findItem(R.id.actionHideEditButtons).isVisible = true
+        menu.findItem(R.id.actionShowEditButtons).isVisible = false
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.detail_favorite_song_fragment,container,false)
+        return inflater.inflate(R.layout.detail_favorite_song_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter = DetailFavoriteSongPresenter(this)
 
-        snackbarMessage = Snackbar.make(fragment_detail_favorite_song_view,"", Snackbar.LENGTH_LONG)
+        snackbarMessage =
+            Snackbar.make(fragment_detail_favorite_song_view, "", Snackbar.LENGTH_LONG)
         presenter.getSong(arguments?.getString("idSearchSong")!!)
+
+        toneUpActionButton.setOnClickListener { presenter.onActionUpSemitone(favoriteSong) }
+        toneDownActionButton.setOnClickListener { presenter.onActionDownSemitone(favoriteSong) }
     }
 
     @SuppressLint("RestrictedApi")
@@ -62,14 +87,14 @@ class DetailFavoriteSongFragment : Fragment() , DetailFavoriteSongContract.View{
         presenter.onViewCreated(findNavController())
         (activity as MainActivity).drawerToggle.isDrawerIndicatorEnabled = false
         (activity as MainActivity).actionbar.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).toolbar.setNavigationOnClickListener{
+        (activity as MainActivity).toolbar.setNavigationOnClickListener {
             presenter.backButtonClicked()
         }
         super.onResume()
 
     }
 
-    override fun updateView(song: FavoriteSong){
+    override fun updateView(song: FavoriteSong) {
         this.favoriteSong = song
         (activity as MainActivity).actionbar.title = song.altTitle
         drawSong()

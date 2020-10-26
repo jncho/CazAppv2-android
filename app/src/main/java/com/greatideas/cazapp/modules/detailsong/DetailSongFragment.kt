@@ -22,6 +22,7 @@ import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.Song
 import com.greatideas.cazapp.modules.main.MainActivity
 import kotlinx.android.synthetic.main.detail_song_fragment.*
+import kotlinx.android.synthetic.main.detail_song_fragment.editButtons
 import kotlinx.android.synthetic.main.input_text_dialog.*
 import kotlinx.android.synthetic.main.search_fragment.*
 
@@ -33,6 +34,8 @@ class DetailSongFragment : Fragment(), DetailSongContract.View {
 
     private var tune = 0
     private var fontSize = 15f
+
+    lateinit var menu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,9 @@ class DetailSongFragment : Fragment(), DetailSongContract.View {
         presenter = DetailSongPresenter(this)
         presenter.getSong(arguments?.getString("idSearchSong")!!)
 
+        toneUpActionButton.setOnClickListener { presenter.onActionUpSemitone(song) }
+        toneDownActionButton.setOnClickListener { presenter.onActionDownSemitone(song) }
+
         snackbarMessage = Snackbar.make(fragment_detail_song_view, "", Snackbar.LENGTH_LONG)
     }
 
@@ -71,6 +77,7 @@ class DetailSongFragment : Fragment(), DetailSongContract.View {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.detail_song_menu, menu)
+        this.menu = menu
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
@@ -82,17 +89,27 @@ class DetailSongFragment : Fragment(), DetailSongContract.View {
             SelectListDialog(presenter, song, tune, fontSize).show(parentFragmentManager, "lists")
             true
         }
-        R.id.action_down_semitone -> {
-            presenter.onActionDownSemitone(song)
-            tune--
+        R.id.actionShowEditButtons -> {
+            showEditButtons()
             true
         }
-        R.id.action_up_semitone -> {
-            presenter.onActionUpSemitone(song)
-            tune++
+        R.id.actionHideEditButtons -> {
+            hideEditButtons()
             true
         }
         else -> false
+    }
+
+    fun hideEditButtons(){
+        editButtons.visibility = View.GONE
+        menu.findItem(R.id.actionHideEditButtons).isVisible = false
+        menu.findItem(R.id.actionShowEditButtons).isVisible = true
+    }
+
+    fun showEditButtons(){
+        editButtons.visibility = View.VISIBLE
+        menu.findItem(R.id.actionHideEditButtons).isVisible = true
+        menu.findItem(R.id.actionShowEditButtons).isVisible = false
     }
 
     override fun updateView(song: Song) {

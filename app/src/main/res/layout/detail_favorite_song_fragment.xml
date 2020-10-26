@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/fragment_detail_favorite_song_view"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fragment_detail_favorite_song_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
     <ScrollView
@@ -18,5 +21,50 @@
 
     </ScrollView>
 
+    <LinearLayout
+            android:id="@+id/editButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical" android:visibility="gone">
 
-</RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/toneUpActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/up"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/toneDownActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/down"
+                app:layout_constraintStart_toStartOf="@+id/toneUpActionButton"
+                app:layout_constraintTop_toBottomOf="@+id/toneUpActionButton" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/textsizeUpActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/text_up"
+                app:layout_constraintStart_toStartOf="@+id/toneDownActionButton"
+                app:layout_constraintTop_toBottomOf="@+id/toneDownActionButton" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/textsizeDownActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/text_down"
+                app:layout_constraintStart_toStartOf="@+id/textsizeUpActionButton"
+                app:layout_constraintTop_toBottomOf="@+id/textsizeUpActionButton" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

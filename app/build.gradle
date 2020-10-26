@@ -55,6 +55,8 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintlayout_version"
     implementation "com.android.support:cardview-v7:$rootProject.ext.supportlibrary_version"
 
+    implementation 'com.lukelorusso:verticalseekbar:1.2.3'
+
     // Realm
     implementation "io.realm:android-adapters:4.0.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
