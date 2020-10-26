@@ -21,6 +21,27 @@ class DetailFavoriteSongFragment : Fragment() , DetailFavoriteSongContract.View{
     lateinit var snackbarMessage: Snackbar
     lateinit var favoriteSong: FavoriteSong
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.detail_favorite_song_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId){
+        R.id.action_up_semitone -> {
+            presenter.onActionUpSemitone(favoriteSong)
+            true
+        }
+        R.id.action_down_semitone -> {
+            presenter.onActionDownSemitone(favoriteSong)
+            true
+        }
+        else -> false
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)

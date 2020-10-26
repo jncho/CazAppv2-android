@@ -14,6 +14,8 @@ interface DetailListSongContract {
         fun getListSong(idCustomList: String,idListSong: String)
         fun onDestroy()
         fun backButtonClicked()
+        fun onActionDownSemitone(listSong: ListSong)
+        fun onActionUpSemitone(listSong: ListSong)
     }
     interface Interactor{
         fun getListSong(idCustomList: String,idListSong: String,callback: ResultCallbackDetailListSong)

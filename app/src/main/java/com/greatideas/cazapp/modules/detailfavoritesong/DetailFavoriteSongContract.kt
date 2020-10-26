@@ -2,6 +2,7 @@ package com.greatideas.cazapp.modules.detailfavoritesong
 
 import androidx.navigation.NavController
 import com.greatideas.cazapp.entity.FavoriteSong
+import com.greatideas.cazapp.entity.Song
 
 interface DetailFavoriteSongContract {
     interface View{
@@ -13,6 +14,8 @@ interface DetailFavoriteSongContract {
         fun getSong(idSong: String)
         fun onDestroy()
         fun backButtonClicked()
+        fun onActionDownSemitone(favoriteSong: FavoriteSong)
+        fun onActionUpSemitone(favoriteSong: FavoriteSong)
     }
     interface Interactor{
         fun getSong(idSong: String,callback: ResultCallbackDetailSong)

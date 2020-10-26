@@ -2,6 +2,8 @@ package com.greatideas.cazapp.modules.detailfavoritesong
 
 import androidx.navigation.NavController
 import com.greatideas.cazapp.entity.FavoriteSong
+import com.greatideas.cazapp.entity.Song
+import com.greatideas.cazapp.localRealm
 
 class DetailFavoriteSongPresenter(var view: DetailFavoriteSongContract.View?) : DetailFavoriteSongContract.Presenter {
 
@@ -35,5 +37,17 @@ class DetailFavoriteSongPresenter(var view: DetailFavoriteSongContract.View?) : 
         interactor.getSong(idSong, callback)
     }
 
+    override fun onActionDownSemitone(favoriteSong: FavoriteSong) {
+        localRealm.executeTransaction {
+            favoriteSong.song?.transpose(-1)
+        }
+        view?.updateView(favoriteSong)
+    }
 
+    override fun onActionUpSemitone(favoriteSong: FavoriteSong) {
+        localRealm.executeTransaction {
+            favoriteSong.song?.transpose(+1)
+        }
+        view?.updateView(favoriteSong)
+    }
 }

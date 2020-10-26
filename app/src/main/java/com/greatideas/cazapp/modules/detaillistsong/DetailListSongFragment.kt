@@ -23,6 +23,27 @@ class DetailListSongFragment : Fragment() , DetailListSongContract.View{
     lateinit var snackbarMessage: Snackbar
     lateinit var listSong: ListSong
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.detail_list_song_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId){
+        R.id.action_down_semitone -> {
+            presenter.onActionDownSemitone(listSong)
+            true
+        }
+        R.id.action_up_semitone -> {
+            presenter.onActionUpSemitone(listSong)
+            true
+        }
+        else -> false
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)

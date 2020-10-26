@@ -20,7 +20,8 @@ open class Line(
             val noteRead = it.groupValues[1]
             val ordinal = Note.getOrdinalNote(noteRead)
             val notes = Note.values()
-            val newOrdinal = (ordinal+semitones) % notes.size
+            var newOrdinal = (ordinal+semitones)
+            newOrdinal = if (newOrdinal>=0) newOrdinal % notes.size else notes.size+newOrdinal
             var result = notes[newOrdinal].label
             if (noteRead == it.value.toUpperCase(Locale.getDefault())){
                 result = result.toUpperCase(Locale.getDefault())
