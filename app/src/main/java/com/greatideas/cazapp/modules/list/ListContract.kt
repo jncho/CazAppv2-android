@@ -13,6 +13,7 @@ interface ListContract {
         fun onListSongSelected(customList: CustomList,listSong: ListSong)
         fun getCustomList(idList: String)
         fun backButtonClicked()
+        fun onListSongMoved(songs: MutableList<ListSong>,fromPosition: Int, toPosition: Int)
     }
     interface Interactor {
         fun getCustomList(idList: String,listener: (CustomList) -> Unit)

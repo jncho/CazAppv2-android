@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.CustomList
 import com.greatideas.cazapp.modules.main.MainActivity
@@ -16,6 +18,7 @@ class ListFragment : Fragment(), ListContract.View {
 
     lateinit var presenter: ListContract.Presenter
     lateinit var adapterList: ListAdapter
+    private lateinit var touchHelper: ItemTouchHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,13 +34,17 @@ class ListFragment : Fragment(), ListContract.View {
         presenter = ListPresenter(this)
 
         // Recycler View
-        adapterList = ListAdapter(null,null) { customList, listSong ->
-            presenter.onListSongSelected(customList,listSong)
+
+        adapterList = ListAdapter(presenter,null,null){ viewHolder ->
+            touchHelper.startDrag(viewHolder)
         }
         customlist_list.apply {
             layoutManager = LinearLayoutManager(activity)
             this.adapter = adapterList
             setHasFixedSize(true)
+            val callback = TouchHelperCallback(adapter as TouchHelperCallback.ItemTouchHelperAdapter)
+            touchHelper = ItemTouchHelper(callback)
+            touchHelper.attachToRecyclerView(this)
         }
     }
 

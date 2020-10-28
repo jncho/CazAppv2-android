@@ -5,6 +5,8 @@ import androidx.navigation.NavController
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.CustomList
 import com.greatideas.cazapp.entity.ListSong
+import com.greatideas.cazapp.localRealm
+import java.util.*
 
 class ListPresenter(var view: ListContract.View?) : ListContract.Presenter {
 
@@ -23,6 +25,12 @@ class ListPresenter(var view: ListContract.View?) : ListContract.Presenter {
 
     override fun backButtonClicked() {
         router?.navigateUp()
+    }
+
+    override fun onListSongMoved(songs: MutableList<ListSong>, fromPosition: Int, toPosition: Int) {
+        localRealm.executeTransaction {
+            Collections.swap(songs,fromPosition,toPosition)
+        }
     }
 
     override fun getCustomList(idList: String) {
