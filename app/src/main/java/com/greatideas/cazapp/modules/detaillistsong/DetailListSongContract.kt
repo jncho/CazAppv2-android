@@ -18,9 +18,11 @@ interface DetailListSongContract {
         fun onActionUpSemitone(listSong: ListSong)
         fun onActionDownSize(listSong: ListSong)
         fun onActionUpSize(listSong: ListSong)
+
     }
     interface Interactor{
         fun getListSong(idCustomList: String,idListSong: String,callback: ResultCallbackDetailListSong)
+
     }
 
     interface ResultCallbackDetailListSong{

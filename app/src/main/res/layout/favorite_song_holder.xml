@@ -8,7 +8,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         card_view:cardElevation="5dp"
-        android:id="@+id/list_card_view">
+        android:id="@+id/favorite_song_card_view">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -16,7 +16,7 @@
 
 
         <TextView
-                android:id="@+id/title_list_holder"
+                android:id="@+id/title_favorite_song_holder"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -28,22 +28,22 @@
                 card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/size_list_holder"
+                android:id="@+id/section_favorite_song_holder"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title_list_holder"
+                android:layout_below="@id/title_favorite_song_holder"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="10dp"
                 android:text="Seccion"
                 android:textSize="14sp"
                 android:textStyle="italic"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintStart_toStartOf="@+id/title_list_holder"
-                card_view:layout_constraintTop_toBottomOf="@+id/title_list_holder" />
+                card_view:layout_constraintStart_toStartOf="@+id/title_favorite_song_holder"
+                card_view:layout_constraintTop_toBottomOf="@+id/title_favorite_song_holder" />
 
 
         <ImageView
-                android:id="@+id/delete_list_holder"
+                android:id="@+id/delete_favorite_song_holder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

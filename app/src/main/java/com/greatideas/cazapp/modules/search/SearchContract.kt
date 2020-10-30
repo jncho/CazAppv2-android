@@ -10,6 +10,8 @@ interface SearchContract {
     interface View{
         fun updateRecyclerView(songs: List<SearchSong>?)
         fun showMessage(message: String)
+        fun hideKeyboard()
+        fun showLoading(show: Boolean)
     }
     interface Presenter{
         fun onViewCreated(router: NavController)

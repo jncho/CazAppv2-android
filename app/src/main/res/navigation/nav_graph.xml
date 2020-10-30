@@ -7,7 +7,8 @@
               android:label="SearchFragment">
         <action
                 android:id="@+id/action_searchFragment_to_detailSongFragment"
-                app:destination="@id/detailSongFragment" />
+                app:destination="@id/detailSongFragment"
+                app:enterAnim="@anim/fragment_fade_enter" />
         <argument
                 android:name="idSearchSong"
                 app:argType="string" />

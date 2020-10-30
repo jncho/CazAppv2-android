@@ -41,7 +41,7 @@ class DetailSongPresenter(var view: DetailSongContract.View?) : DetailSongContra
 
         interactor.addFavorite(song, tune, fontSize){ isSuccess, error ->
             if (isSuccess){
-                view?.showMessage("Song saves in favorites")
+                view?.showMessage("Song save to favorites")
             }else{
                 view?.showMessage(error!!)
             }

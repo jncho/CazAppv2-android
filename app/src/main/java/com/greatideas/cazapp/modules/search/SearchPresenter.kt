@@ -24,13 +24,16 @@ class SearchPresenter(var view: SearchContract.View?) : SearchContract.Presenter
     }
 
     override fun onQueryTextSubmit(query: String) {
-
+        view?.hideKeyboard()
+        view?.showLoading(true)
         val callback = object:SearchContract.ResultCallback<List<SearchSong>>{
             override fun onFailureExecute(description: String?) {
+                view?.showLoading(false)
                 view?.showMessage(description ?: "Error")
             }
 
             override fun onSuccessExecute(result: List<SearchSong>) {
+                view?.showLoading(false)
                 view?.updateRecyclerView(result)
             }
         }

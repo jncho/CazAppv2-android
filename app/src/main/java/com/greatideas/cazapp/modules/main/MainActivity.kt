@@ -1,11 +1,13 @@
 package com.greatideas.cazapp.modules.main
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -73,6 +75,15 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun hideDrawer() {
         drawer_layout.closeDrawers()
+    }
+
+    override fun hideKeyboard() {
+        val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = currentFocus
+        if (view == null) {
+            view = View(this)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }

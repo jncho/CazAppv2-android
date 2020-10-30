@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.FavoriteSong
+import com.greatideas.cazapp.entity.ListSong
 
 class FavoritesPresenter(var view: FavoritesContract.View?) : FavoritesContract.Presenter {
 
@@ -23,6 +24,15 @@ class FavoritesPresenter(var view: FavoritesContract.View?) : FavoritesContract.
     override fun getFavorites() {
         interactor.getFavorites {
             view?.updateRecyclerView(it)
+        }
+    }
+
+    override fun onDeleteSong(favoriteSong: FavoriteSong){
+        view?.showDeletedAlertDialog("Delete song","Are you sure to delete this song?") {
+            interactor.deleteSong(favoriteSong) {
+                view?.updateRecyclerView(null)
+                view?.showMessage("Song deleted.")
+            }
         }
     }
 

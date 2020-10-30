@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.entity.CustomList
+import com.greatideas.cazapp.entity.ListSong
 
 class ListsPresenter(var view: ListsContract.View?) : ListsContract.Presenter {
 
@@ -23,6 +24,15 @@ class ListsPresenter(var view: ListsContract.View?) : ListsContract.Presenter {
     override fun getLists() {
         interactor.getLists {
             view?.updateRecyclerView(it)
+        }
+    }
+
+    override fun onDeleteSong(customList: CustomList){
+        view?.showDeletedAlertDialog("Delete list","Are you sure to delete this list?") {
+            interactor.deleteSong(customList) {
+                view?.updateRecyclerView()
+                view?.showMessage("List deleted.")
+            }
         }
     }
 

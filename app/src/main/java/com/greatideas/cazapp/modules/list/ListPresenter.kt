@@ -24,7 +24,7 @@ class ListPresenter(var view: ListContract.View?) : ListContract.Presenter {
     }
 
     override fun backButtonClicked() {
-        router?.navigateUp()
+        router.navigateUp()
     }
 
     override fun onListSongMoved(songs: MutableList<ListSong>, fromPosition: Int, toPosition: Int) {
@@ -36,6 +36,15 @@ class ListPresenter(var view: ListContract.View?) : ListContract.Presenter {
     override fun getCustomList(idList: String) {
         interactor.getCustomList(idList) {
             view?.updateRecyclerView(it)
+        }
+    }
+
+    override fun onDeleteSong(listSong: ListSong){
+        view?.showDeletedAlertDialog("Delete song","Are you sure to delete this song?") {
+            interactor.deleteSong(listSong) {
+                view?.updateRecyclerView(null)
+                view?.showMessage("Song deleted.")
+            }
         }
     }
 

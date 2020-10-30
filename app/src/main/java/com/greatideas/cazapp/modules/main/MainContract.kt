@@ -7,6 +7,7 @@ interface MainContract {
 
     interface View{
         fun hideDrawer()
+        fun hideKeyboard()
     }
     interface Presenter{
         fun onViewCreated(router: NavController)

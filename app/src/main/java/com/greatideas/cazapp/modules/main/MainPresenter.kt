@@ -19,7 +19,7 @@ class MainPresenter(private var view: MainContract.View?) : MainContract.Present
     }
 
     override fun navigationItemSelectedListener() = NavigationView.OnNavigationItemSelectedListener {
-
+        view?.hideKeyboard()
         when (it.itemId) {
             R.id.action_search -> {
                 router?.navigate(R.id.toSearchFragment)

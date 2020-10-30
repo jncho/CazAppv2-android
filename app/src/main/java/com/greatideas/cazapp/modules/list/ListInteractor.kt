@@ -14,4 +14,11 @@ class ListInteractor : ListContract.Interactor {
         listener(customList)
     }
 
+    override fun deleteSong(listSong: ListSong, callback: () -> Unit) {
+        localRealm.executeTransaction {
+            listSong.deleteFromRealm()
+            callback()
+        }
+    }
+
 }
