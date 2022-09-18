@@ -21,7 +21,7 @@ class SearchInteractor : SearchContract.Interactor {
                 callback.onSuccessExecute(it.get())
             } else {
                 Log.e(ContentValues.TAG, "Error get songs: ${it.error.errorMessage}")
-                callback.onFailureExecute(it.error.message)
+                callback.onFailureExecute(it.error.errorMessage)
             }
         })
     }

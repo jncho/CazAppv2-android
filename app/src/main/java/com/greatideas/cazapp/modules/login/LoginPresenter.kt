@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.Task
 import com.greatideas.cazapp.R
 import com.greatideas.cazapp.cazAppDB
 import com.greatideas.cazapp.modules.main.MainActivity
+import io.realm.mongodb.AppException
 import io.realm.mongodb.Credentials
 
 
@@ -25,6 +26,11 @@ class LoginPresenter(var view: LoginContract.View) : LoginContract.Presenter {
 
     override fun onViewCreated(router: NavController) {
         this.router = router
+        try {
+            cazAppDB.currentUser()?.logOut()
+        }catch (e: AppException){
+            Log.e(TAG, e.errorMessage);
+        }
     }
 
     override fun onLoginGoogle(fragment: LoginFragment) {

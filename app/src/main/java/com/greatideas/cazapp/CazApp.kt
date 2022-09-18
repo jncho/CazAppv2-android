@@ -8,6 +8,7 @@ import io.realm.log.LogLevel
 import io.realm.log.RealmLog
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration
+import javax.net.ssl.HttpsURLConnection
 
 lateinit var cazAppDB : App
 lateinit var localRealm: Realm

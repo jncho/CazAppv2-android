@@ -70,4 +70,10 @@ dependencies {
     implementation "io.realm:android-adapters:4.0.0"
     implementation "androidx.recyclerview:recyclerview:1.2.0-alpha02"
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    // POI docx
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    implementation group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.1.0'
+    implementation 'javax.xml.stream:stax-api:1.0'
+    implementation 'com.fasterxml:aalto-xml:1.2.2'
 }

@@ -52,7 +52,7 @@ class MainPresenter(private var view: MainContract.View?) : MainContract.Present
         } catch (e: IllegalStateException){
             Log.w(TAG(), e)
         }
-        if (user == null){
+        if (user?.isLoggedIn != true){
             router?.navigate(R.id.toLoginFragment)
         }
     }

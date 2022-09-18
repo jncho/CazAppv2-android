@@ -39,6 +39,12 @@ class ListPresenter(var view: ListContract.View?) : ListContract.Presenter {
         }
     }
 
+    override fun exportToDocx(idList: String) {
+        interactor.exportToDocx(idList) { document, listName ->
+            view?.shareDocx(document, listName)
+        }
+    }
+
     override fun onDeleteSong(listSong: ListSong){
         view?.showDeletedAlertDialog("Delete song","Are you sure to delete this song?") {
             interactor.deleteSong(listSong) {

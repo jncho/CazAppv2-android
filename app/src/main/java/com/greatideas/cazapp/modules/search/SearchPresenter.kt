@@ -30,6 +30,7 @@ class SearchPresenter(var view: SearchContract.View?) : SearchContract.Presenter
             override fun onFailureExecute(description: String?) {
                 view?.showLoading(false)
                 view?.showMessage(description ?: "Error")
+                router?.navigate(R.id.toLoginFragment)
             }
 
             override fun onSuccessExecute(result: List<SearchSong>) {

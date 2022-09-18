@@ -1,14 +1,10 @@
 package com.greatideas.cazapp.modules.main
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +13,19 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.Navigation.findNavController
 import com.greatideas.cazapp.R
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.IOException
+import java.io.InputStream
+import java.net.MalformedURLException
+import java.security.KeyManagementException
+import java.security.KeyStore
+import java.security.KeyStoreException
+import java.security.NoSuchAlgorithmException
+import java.security.cert.CertificateException
+import java.security.cert.CertificateFactory
+import java.security.cert.X509Certificate
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManagerFactory
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
@@ -29,6 +38,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setCustomCertificateAuthority()
         presenter = MainPresenter(this)
 
         toolbar = my_toolbar
@@ -47,6 +57,53 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter?.checkLogin()
         super.onResume()
     }
+
+    fun setCustomCertificateAuthority() {
+        try {
+            // Load CAs from an InputStream
+            // (could be from a resource or ByteArrayInputStream or ...)
+            val cf: CertificateFactory = CertificateFactory.getInstance("X.509")
+            // From https://www.washington.edu/itconnect/security/ca/load-der.crt
+            val caInput: InputStream = assets.open("certs/cas.pem")
+            val ca: X509Certificate = caInput.use {
+                cf.generateCertificate(it) as X509Certificate
+            }
+
+            // Create a KeyStore containing our trusted CAs
+            val keyStoreType = KeyStore.getDefaultType()
+            val keyStore = KeyStore.getInstance(keyStoreType).apply {
+                load(null, null)
+                setCertificateEntry("ca", ca)
+            }
+
+            // Create a TrustManager that trusts the CAs inputStream our KeyStore
+            val tmfAlgorithm: String = TrustManagerFactory.getDefaultAlgorithm()
+            val tmf: TrustManagerFactory = TrustManagerFactory.getInstance(tmfAlgorithm).apply {
+                init(keyStore)
+            }
+
+            // Create an SSLContext that uses our TrustManager
+            val context: SSLContext = SSLContext.getInstance("TLS").apply {
+                init(null, tmf.trustManagers, null)
+            }
+
+            HttpsURLConnection.setDefaultSSLSocketFactory(context.socketFactory)
+
+        } catch (e: CertificateException) {
+            e.printStackTrace()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        } catch (e: KeyStoreException) {
+            e.printStackTrace()
+        } catch (e: KeyManagementException) {
+            e.printStackTrace()
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
 
     fun setupDrawerToggle() {
         drawerToggle = object : ActionBarDrawerToggle(
